@@ -14,10 +14,13 @@ services:
       - DB_POSTGRESDB_PASSWORD=n8n_password
       - NODE_FUNCTION_ALLOW_EXTERNAL=pg
       - PORT=5555
+      - N8N_DATA_FOLDER=/root/.n8n # Caminho para os dados do n8n
     ports:
       - "5555:5555"
     depends_on:
       - postgres
+    volumes:
+      - n8n_data:/root/.n8n # Volume persistente para o n8n
 
   postgres:
     image: postgres:12
@@ -32,3 +35,4 @@ services:
 
 volumes:
   postgres_data:
+  n8n_data: # Definição do volume persistente do n8n
